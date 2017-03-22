@@ -10,4 +10,10 @@ public class MainApp extends GameEngine {
     public static void main(String[] args) {
         PApplet.main(new String[]{"nl.han.ica.StarDestroyer.MainApp"});
     }
+
+    public void setupGame() {
+    }
+
+    public void update() {
+    }
 }
