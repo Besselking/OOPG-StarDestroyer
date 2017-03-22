@@ -10,6 +10,7 @@ import static processing.core.PApplet.sqrt;
 
 /**
  * Created by Besselking on 04-Mar-17.
+ * Edited by widdiewaddo on 22-Mar-17.
  */
 public class Cell extends GameObject {
     protected float size;
@@ -24,7 +25,7 @@ public class Cell extends GameObject {
         this.growing = growing;
 
         setDirectionSpeed(initDirection, initSpeed);
-        setFriction(0.05f);
+        setFriction(0.06f);
     }
 
     public Cell(CellSplitter world, float mass){
