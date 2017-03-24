@@ -10,7 +10,7 @@ import static processing.core.PApplet.sqrt;
 
 /**
  * Created by Besselking on 04-Mar-17.
- * Edited by widdiewaddo on 22-Mar-17.
+ * Leave it all to me
  */
 public class Cell extends GameObject {
     protected float size;
