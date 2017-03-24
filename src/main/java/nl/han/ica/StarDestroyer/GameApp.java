@@ -30,8 +30,8 @@ public class GameApp extends GameEngine {
         addGameObject(player, width / 2, height / 2);
 
         Dashboard dashBoard = new Dashboard(0, 0, width, 100);
-        dashText = new Textobject("score", 0);
-        dashBoard.addGameObject(dashText);
+        dashText = new Textobject("score: ", 0);
+        dashBoard.addGameObject(dashText, 0, 0);
         addDashboard(dashBoard);
     }
 
