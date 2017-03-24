@@ -9,7 +9,7 @@ import processing.core.PApplet;
  * Created by Marijn Besseling on 22-Mar-17.
  */
 public class GameApp extends GameEngine {
-    private Textobject dashText;
+    private Textobject dashText, boardText;
     private Player player;
 
 
@@ -31,7 +31,9 @@ public class GameApp extends GameEngine {
 
         Dashboard dashBoard = new Dashboard(0, 0, width, 100);
         dashText = new Textobject("score: ", 0);
-        dashBoard.addGameObject(dashText, 0, 0);
+        boardText = new Textobject("lifes: ", 3);
+        dashBoard.addGameObject(dashText, 500, 10);
+        dashBoard.addGameObject(boardText, 20, 10);
         addDashboard(dashBoard);
     }
 
