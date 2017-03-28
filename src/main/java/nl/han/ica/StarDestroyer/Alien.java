@@ -13,7 +13,6 @@ public class Alien extends Enemy{
 
     @Override
     public void draw(PGraphics g) {
-
     }
 
     @Override

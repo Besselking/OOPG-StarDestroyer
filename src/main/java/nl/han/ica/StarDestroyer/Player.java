@@ -42,7 +42,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         g.noStroke();
         g.triangle(-8, 11, 8, 11, 0, 30);
         g.rotate(-getDirection());
-        g.translate(0, 0);
+        g.translate(-super.x, -super.y);
     }
 
 

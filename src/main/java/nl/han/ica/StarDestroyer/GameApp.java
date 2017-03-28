@@ -11,6 +11,7 @@ import processing.core.PApplet;
 public class GameApp extends GameEngine {
     private Textobject dashText, boardText;
     private Player player;
+    private Astroid astroid;
 
 
     public static void main(String[] args) {
@@ -27,7 +28,9 @@ public class GameApp extends GameEngine {
 
     private void createObjects() {
         player = new Player(this);
-        addGameObject(player, width / 2, height / 2);
+        astroid = new Astroid(width/2, height/2, 70, 70);
+        addGameObject(player, width/2, height/2);
+        addGameObject(astroid);
 
         Dashboard dashBoard = new Dashboard(0, 0, width, 100);
         dashText = new Textobject("score: ", 0);
