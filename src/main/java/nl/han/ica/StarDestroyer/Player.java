@@ -6,6 +6,8 @@ import processing.core.PGraphics;
 
 import java.util.List;
 
+import static processing.core.PApplet.radians;
+
 /**
  * Created by Marijn Besseling on 24-Mar-17.
  */
@@ -20,18 +22,17 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         this.app = app;
         this.life = 3;
         this.shots = 1;
-        setDirection(0);
+        setFriction(0.04f);
     }
 
     @Override
     public void update() {
-        setDirection(direction += 0.01);
     }
 
     @Override
     public void draw(PGraphics g) {
         g.translate(super.x, super.y);
-        g.rotate(getDirection() - 90);
+        g.rotate(radians(direction));
         g.fill(255);
         g.stroke(255);
         g.rectMode(CENTER);
@@ -41,8 +42,17 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         g.fill(255, 128, 0);
         g.noStroke();
         g.triangle(-8, 11, 8, 11, 0, 30);
-        g.rotate(-getDirection());
+        g.rotate(radians(-direction));
         g.translate(-super.x, -super.y);
+    }
+
+    public void keyPressed(int keyCode, char key) {
+        float newSpeed = getSpeed();
+        if (key == 'a') direction += -3;
+        if (key == 'd') direction += 3;
+        if (key == 'w') newSpeed = (getSpeed() > 4) ? 4 : getSpeed() + 2;
+        setDirectionSpeed(direction, newSpeed);
+
     }
 
 
