@@ -12,7 +12,10 @@ public abstract class Enemy extends GameObject{
     }
 
     public void wrap() {
-
+        if(x > 1000 + width) x = -width;
+        else if(x < -width) x = 1000 + width;
+        if(y > 900 + height) y = -height;
+        else if(y < -height) y = 900 + height;
     }
 
     public abstract void hit();

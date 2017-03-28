@@ -13,12 +13,13 @@ import static processing.core.PApplet.*;
 public class Astroid extends Enemy{
     private Random r = new Random();
     private PApplet PApplet = new PApplet();
-    private float smoothness = 0.05f, rot = 0.01f;
+    private float smoothness = 0.05f, rot = 0.01f, speed = 0.8f;
     private int minRadius = 50, maxRadius = 80, seed = r.nextInt();
-    private int direction = r.nextInt();
+    private boolean direction;
 
     public Astroid(float x, float y, float width, float height) {
         super(x, y, width, height);
+        direction = r.nextBoolean();
     }
 
     @Override
@@ -42,7 +43,15 @@ public class Astroid extends Enemy{
     }
 
     public void move() {
-        setDirectionSpeed(30, 1);
+        //setDirectionSpeed(30, 1);
+        if(direction) {
+            this.x += speed;
+            this.y += speed;
+        }
+        else {
+            this.x -= speed;
+            this.y -= speed;
+        }
     }
 
     @Override
@@ -57,7 +66,8 @@ public class Astroid extends Enemy{
 
     @Override
     public void update() {
-        //rotation();
+        rotation();
         move();
+        wrap();
     }
 }

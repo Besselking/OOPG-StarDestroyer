@@ -5,13 +5,17 @@ import nl.han.ica.OOPDProcessingEngineHAN.Engine.GameEngine;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Created by Marijn Besseling on 22-Mar-17.
  */
 public class GameApp extends GameEngine {
     private Textobject dashText, boardText;
     private Player player;
-    private Astroid astroid;
+    private ArrayList<Enemy> enemys = new ArrayList<>();
+    private Random r = new Random();
 
 
     public static void main(String[] args) {
@@ -28,9 +32,13 @@ public class GameApp extends GameEngine {
 
     private void createObjects() {
         player = new Player(this);
-        astroid = new Astroid(width/2, height/2, 70, 70);
+        for(int i=0; i<5; i++) {
+            enemys.add(new Astroid(r.nextInt(1000), r.nextInt(900), 70, 70));
+        }
         addGameObject(player, width/2, height/2);
-        addGameObject(astroid);
+        for(Enemy e : enemys) {
+            addGameObject(e);
+        }
 
         Dashboard dashBoard = new Dashboard(0, 0, width, 100);
         dashText = new Textobject("score: ", 0);

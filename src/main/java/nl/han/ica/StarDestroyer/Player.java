@@ -17,12 +17,14 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     private IPowerup PU;
     private GameApp app;
     private float direction = getDirection();
+    private boolean gas;
 
     public Player(GameApp app) {
         this.app = app;
         this.life = 3;
         this.shots = 1;
         setFriction(0.04f);
+        gas = false;
     }
 
     @Override
@@ -39,9 +41,11 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         g.rect(0, 0, 20, 20);
         g.line(-10, 10, -10, 20);
         g.line(10, 10, 10, 20);
-        g.fill(255, 128, 0);
-        g.noStroke();
-        g.triangle(-8, 11, 8, 11, 0, 30);
+        if (gas) {
+            g.fill(255, 128, 0);
+            g.noStroke();
+            g.triangle(-8, 11, 8, 11, 0, 30);
+        }
         g.rotate(radians(-direction));
         g.translate(-super.x, -super.y);
     }
@@ -50,7 +54,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         float newSpeed = getSpeed();
         if (key == 'a') direction += -3;
         if (key == 'd') direction += 3;
-        if (key == 'w') newSpeed = (getSpeed() > 4) ? 4 : getSpeed() + 2;
+        if (key == 'w') newSpeed = (getSpeed() > 4) ? 4 : getSpeed() + 2; gas = !gas;
         setDirectionSpeed(direction, newSpeed);
 
     }
