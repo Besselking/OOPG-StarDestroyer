@@ -10,6 +10,7 @@ import static processing.core.PApplet.radians;
 
 /**
  * Created by Marijn Besseling on 24-Mar-17.
+ * better
  */
 public class Player extends GameObject implements ICollidableWithGameObjects {
     private int life;

@@ -23,7 +23,7 @@ public class Alien extends Enemy{
         g.fill(0);
         g.ellipse(x-width/5, y-height/5, width/8, height/8);
         g.ellipse(x+width/5, y-height/5, width/8, height/8);
-        g.rect(x-width/4, y);
+        g.rect(x-width/4, y, x+width/4, y);
     }
 
     @Override
