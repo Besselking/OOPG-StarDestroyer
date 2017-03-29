@@ -59,6 +59,10 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
     }
 
+    public void keyReleased(int keyCode, char key) {
+
+    }
+
 
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
     }
