@@ -18,6 +18,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     private GameApp app;
     private float direction = getDirection();
     private boolean gas;
+    private boolean[] keys;
 
     public Player(GameApp app) {
         this.app = app;
@@ -25,10 +26,20 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         this.shots = 1;
         setFriction(0.04f);
         gas = false;
+        keys = new boolean[3];
     }
 
     @Override
     public void update() {
+        float newSpeed = getSpeed();
+
+        if (keys[0]) direction += -3;
+        if (keys[1]) direction += 3;
+        if (keys[2]) newSpeed = (getSpeed() > 4) ? 4 : getSpeed() + 2;
+
+        setDirectionSpeed(direction, newSpeed);
+        setFriction(0.4f);
+        gas = false;
     }
 
     @Override
@@ -51,16 +62,18 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     }
 
     public void keyPressed(int keyCode, char key) {
-        float newSpeed = getSpeed();
-        if (key == 'a') direction += -3;
-        if (key == 'd') direction += 3;
-        if (key == 'w') newSpeed = (getSpeed() > 4) ? 4 : getSpeed() + 2; gas = !gas;
-        setDirectionSpeed(direction, newSpeed);
+        gas = true;
+        if (key == 'a') keys[0] = true;
+        if (key == 'd') keys[1] = true;
+        if (key == 'w') keys[2] = true;
+        if (key == ' ') shoot();
 
     }
 
     public void keyReleased(int keyCode, char key) {
-
+        if (key == 'a') keys[0] = false;
+        if (key == 'd') keys[1] = false;
+        if (key == 'w') keys[2] = false;
     }
 
 
