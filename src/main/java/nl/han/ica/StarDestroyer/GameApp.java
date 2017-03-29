@@ -25,7 +25,6 @@ public class GameApp extends GameEngine {
     public void setupGame() {
         int worldWidth = 1000;
         int worldHeight = 900;
-
         createViewWithoutViewport(worldWidth, worldHeight);
         createObjects();
     }
@@ -33,9 +32,9 @@ public class GameApp extends GameEngine {
     private void createObjects() {
         player = new Player(this);
         for(int i=0; i<5; i++) {
-            enemys.add(new Astroid(r.nextInt(1000), r.nextInt(900), 70, 70));
+            enemys.add(new Astroid(r.nextInt(1000), r.nextInt(900), 70, 70, this));
         }
-        enemys.add(new Alien(100, 100, 70, 70));
+        enemys.add(new Alien(100, 100, 70, 70, this));
         addGameObject(player, width/2, height/2);
         for(Enemy e : enemys) {
             addGameObject(e);
@@ -51,7 +50,7 @@ public class GameApp extends GameEngine {
 
     private void createViewWithoutViewport(int screenWidth, int screenHeight) {
         View view = new View(screenWidth, screenHeight);
-        view.setBackground(20, 20, 20);
+        view.setBackground(70, 70, 70);
 
         setView(view);
         size(screenWidth, screenHeight);

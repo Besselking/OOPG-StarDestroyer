@@ -19,6 +19,11 @@ public class Star extends Enemy{
     }
 
     @Override
+    public void move() {
+
+    }
+
+    @Override
     public void action() {
 
     }

@@ -11,11 +11,11 @@ public abstract class Enemy extends GameObject{
         super(x, y, width, height);
     }
 
-    public void wrap() {
-        if(x > 1000 + width) x = -width;
-        else if(x < -width) x = 1000 + width;
-        if(y > 900 + height) y = -height;
-        else if(y < -height) y = 900 + height;
+    public void wrap(GameApp app) {
+        if(x > app.getWidth() + width) x = -width;
+        else if(x < -width) x = app.getWidth() + width;
+        if(y > app.getHeight() + height) y = -height;
+        else if(y < -height) y = app.getHeight() + height;
     }
 
     public abstract void hit();

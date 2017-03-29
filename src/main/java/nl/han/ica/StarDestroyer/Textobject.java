@@ -19,6 +19,7 @@ public class Textobject extends GameObject {
     }
 
     public void draw(PGraphics g) {
+        g.textSize(20);
         g.fill(255);
         g.textAlign(g.LEFT, g.TOP);
         g.text(text + score, getX(), getY());
