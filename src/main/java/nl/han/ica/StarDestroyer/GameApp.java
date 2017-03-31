@@ -26,7 +26,7 @@ public class GameApp extends GameEngine {
 
     public void setupGame() {
         int worldWidth = 1000;
-        int worldHeight = 900;
+        int worldHeight = 650;
         createViewWithoutViewport(worldWidth, worldHeight);
         createObjects();
     }
@@ -37,7 +37,7 @@ public class GameApp extends GameEngine {
         Dashboard dashBoard = new Dashboard(0, 0, width, 100);
         dashText = new Textobject("score: ", score);
         boardText = new Textobject("lifes: ", player.getLife());
-        dashBoard.addGameObject(dashText, 500, 10);
+        dashBoard.addGameObject(dashText, this.width/2, 10);
         dashBoard.addGameObject(boardText, 20, 10);
         addDashboard(dashBoard);
     }
