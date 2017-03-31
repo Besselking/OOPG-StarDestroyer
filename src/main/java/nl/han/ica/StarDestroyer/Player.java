@@ -21,21 +21,26 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     private GameApp app;
     private float direction = getDirection();
     private boolean[] keys;
-    private PShape ship, engines;
-    private PApplet papp;
     private boolean shoot;
+    private boolean vulnerable;
+    private int iFrames;
 
     public Player(GameApp app) {
+        setWidth(20);
+        setHeight(20);
         this.app = app;
         this.life = 3;
         this.shots = 1;
         setFriction(0.04f);
         keys = new boolean[4];
+        vulnerable = true;
     }
 
     @Override
     public void update() {
         float newSpeed = getSpeed();
+        if (!vulnerable) iFrames++;
+        if (iFrames > 240) vulnerable = true;
 
         if (keys[0]) direction += -3;
         if (keys[1]) direction += 3;
@@ -53,22 +58,11 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void draw(PGraphics g) {
-        g.pushMatrix();
-        g.translate(super.x, super.y);
-        g.rotate(radians(direction));
-        g.fill(255);
-        g.stroke(255);
-        g.rectMode(CENTER);
-        g.rect(0, 0, 20, 20);
-        g.line(-10, 10, -10, 20);
-        g.line(10, 10, 10, 20);
-        if (keys[2]) {
-            g.fill(255, 128, 0);
-            g.noStroke();
-            g.triangle(-8, 11, 8, 11, 0, 30);
+        if (iFrames % 2 != 0 && !vulnerable) {
+            display(g);
+        } else {
+            display(g);
         }
-        g.rotate(radians(-direction));
-        g.popMatrix();
     }
 
     public void keyPressed(int keyCode, char key) {
@@ -89,6 +83,14 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
 
     public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+        for (GameObject c : collidedGameObjects) {
+            if (vulnerable) {
+                if (c instanceof Enemy) die();
+                else if (c instanceof Bullet) {
+                    if (((Bullet) c).getOwner() != this) die();
+                }
+            }
+        }
     }
 
 
@@ -105,6 +107,25 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     public void setLife(int life) {
     }
 
+    private void display(PGraphics g) {
+        g.pushMatrix();
+        g.translate(super.x, super.y);
+        g.rotate(radians(direction));
+        g.fill(255);
+        g.stroke(255);
+        g.rectMode(CENTER);
+        g.rect(0, 0, 20, 20);
+        g.line(-10, 10, -10, 20);
+        g.line(10, 10, 10, 20);
+        if (keys[2]) {
+            g.fill(255, 128, 0);
+            g.noStroke();
+            g.triangle(-8, 11, 8, 11, 0, 30);
+        }
+        g.rotate(radians(-direction));
+        g.popMatrix();
+    }
+
 
     public int getLife() {
         return life;
@@ -112,5 +133,10 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
 
     public void die() {
+        vulnerable = false;
+        iFrames = 0;
+        life--;
+        setX(app.getWidth() / 2);
+        setY(app.getHeight() / 2);
     }
 }

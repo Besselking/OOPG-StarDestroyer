@@ -17,6 +17,10 @@ public class Bullet extends GameObject {
         setDirectionSpeed(initDirection, initSpeed);
     }
 
+    public GameObject getOwner() {
+        return owner;
+    }
+
     @Override
     public void update() {
         if (!inBounds()) app.deleteGameObject(this);
@@ -32,4 +36,5 @@ public class Bullet extends GameObject {
         g.fill(255);
         g.ellipse(super.x, super.y, 3, 3);
     }
+
 }
