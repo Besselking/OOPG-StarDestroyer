@@ -1,9 +1,6 @@
 package nl.han.ica.StarDestroyer;
 
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
-
-import java.util.List;
 
 /**
  * Created by Marijn Besseling on 24-Mar-17.
@@ -11,8 +8,8 @@ import java.util.List;
 public class Star extends Enemy{
     private boolean blackhole;
 
-    Star(float x, float y, float width, float height) {
-        super(x, y, width, height);
+    Star(float x, float y, float width, float height, GameApp app) {
+        super(x, y, width, height, app);
         blackhole = false;
     }
 
@@ -38,11 +35,6 @@ public class Star extends Enemy{
 
     @Override
     public void update() {
-
-    }
-
-    @Override
-    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 
     }
 }

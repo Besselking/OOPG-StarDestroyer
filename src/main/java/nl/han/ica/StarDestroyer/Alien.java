@@ -9,14 +9,12 @@ import java.util.List;
  * Created by Marijn Besseling on 24-Mar-17.
  */
 public class Alien extends Enemy{
-    private GameApp app;
-    private float direction = getDirection();
     private float target;
     private GameObject player;
     private long shoot = 0;
 
     public Alien(float x, float y, float width, float height, GameApp app, GameObject player) {
-        super(x, y, width, height);
+        super(x, y, width, height, app);
         this.app = app;
         this.player = player;
      }
@@ -49,19 +47,14 @@ public class Alien extends Enemy{
 
     @Override
     public void hit() {
-
+        app.deleteGameObject(this);
     }
 
     @Override
     public void update() {
         if(x < app.getWidth()/3 || x > (app.getWidth()/3)*2) setDirectionSpeed(90, 3);
         else setDirectionSpeed(135, 3);
-        wrap(app);
+        wrap();
         action();
-    }
-
-    @Override
-    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-
     }
 }

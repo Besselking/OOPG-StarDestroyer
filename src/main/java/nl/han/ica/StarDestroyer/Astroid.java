@@ -1,10 +1,8 @@
 package nl.han.ica.StarDestroyer;
 
-import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 
-import java.util.List;
 import java.util.Random;
 
 import static processing.core.PApplet.*;
@@ -15,15 +13,17 @@ import static processing.core.PApplet.*;
 public class Astroid extends Enemy{
     private Random r = new Random();
     private PApplet PApplet = new PApplet();
-    private GameApp app;
-    private float smoothness = 0.05f, rot = 0.01f, speed = 0.8f;
-    private int minRadius = 50, maxRadius = 80, seed = r.nextInt();
-    private boolean direction;
+    private float smoothness = 0.05f, rot = 0.01f;
+    private float minRadius, maxRadius;
+    private int seed, direction, type;
 
-    public Astroid(float x, float y, float width, float height, GameApp app) {
-        super(x, y, width, height);
-        direction = r.nextBoolean();
-        this.app = app;
+    public Astroid(float x, float y, int type, GameApp app) {
+        super(x, y, type*35f, type*35f, app);
+        this.direction = r.nextInt();
+        this.seed = r.nextInt();
+        this.type = type;
+        this.minRadius = type*15.7f;
+        this.maxRadius = type*26.7f;
     }
 
     @Override
@@ -38,7 +38,6 @@ public class Astroid extends Enemy{
             g.vertex(xr,yr);
         }
         g.endShape(CLOSE);
-        g.noFill();
     }
 
     public void rotation() {
@@ -50,34 +49,23 @@ public class Astroid extends Enemy{
 
     @Override
     public void hit() {
-
+        app.deleteGameObject(this);
     }
 
     @Override
     public void action() {
-        for(int i=0; i<2; i++){
-            app.addGameObject(new Astroid(this.getX(),this.getY(), 140, 140, app));
-        }
-        app.deleteGameObject(this);
+        if(this.type > 1) {
+            for (int i = 0; i < 2; i++) {
+                app.addGameObject(new Astroid(this.getX(), this.getY(), this.type - 1, app));
+            }
+            app.score += 100;
+        } else app.score += 150;
     }
 
     @Override
     public void update() {
         rotation();
-        if(direction) setDirectionSpeed(135, 2);
-        else setDirectionSpeed(225, -2);
-        wrap(app);
-    }
-
-    @Override
-    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
-        for (GameObject c : collidedGameObjects) {
-            if (c instanceof Bullet) {
-                if (((Bullet)c).getOwner() instanceof Player) {
-                    this.action();
-                    app.deleteGameObject(c);
-                }
-            }
-        }
+        setDirectionSpeed(direction, 2);
+        wrap();
     }
 }

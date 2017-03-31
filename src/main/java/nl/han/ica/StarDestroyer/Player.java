@@ -15,8 +15,7 @@ import static processing.core.PApplet.radians;
  * better
  */
 public class Player extends GameObject implements ICollidableWithGameObjects {
-    private int life;
-    private int shots;
+    private int life, shots;
     private IPowerup PU;
     private GameApp app;
     private float direction = getDirection();
@@ -28,12 +27,12 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     public Player(GameApp app) {
         setWidth(20);
         setHeight(20);
+        setFriction(0.04f);
         this.app = app;
         this.life = 3;
         this.shots = 1;
-        setFriction(0.04f);
-        keys = new boolean[4];
-        vulnerable = false;
+        this.keys = new boolean[4];
+        this.vulnerable = false;
     }
 
     @Override
@@ -54,6 +53,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         } else shoot = true;
 
         setDirectionSpeed(direction, newSpeed);
+        wrap();
     }
 
     @Override
@@ -105,6 +105,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
 
     public void setLife(int life) {
+        this.life = life;
     }
 
     private void display(PGraphics g) {
@@ -126,6 +127,12 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         g.popMatrix();
     }
 
+    public void wrap() {
+        if(x > app.getWidth() + width) x = -width;
+        else if(x < -width) x = app.getWidth() + width;
+        if(y > app.getHeight() + height) y = -height;
+        else if(y < -height) y = app.getHeight() + height;
+    }
 
     public int getLife() {
         return life;
