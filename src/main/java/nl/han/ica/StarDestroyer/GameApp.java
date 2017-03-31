@@ -34,7 +34,7 @@ public class GameApp extends GameEngine {
         for(int i=0; i<5; i++) {
             enemys.add(new Astroid(r.nextInt(1000), r.nextInt(900), 70, 70, this));
         }
-        enemys.add(new Alien(100, 100, 70, 70, this));
+        enemys.add(new Alien(100, 100, 70, 70, this, player));
         addGameObject(player, width/2, height/2);
         for(Enemy e : enemys) {
             addGameObject(e);

@@ -38,11 +38,11 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
         if (keys[0]) direction += -3;
         if (keys[1]) direction += 3;
-        if (keys[2]) newSpeed = (getSpeed() > 4) ? 4 : getSpeed() + 2;
+        if (keys[2]) newSpeed = 6;
+        else newSpeed -= (newSpeed/100);
         if (keys[3]) shoot();
 
         setDirectionSpeed(direction, newSpeed);
-        setFriction(0.4f);
     }
 
     @Override
