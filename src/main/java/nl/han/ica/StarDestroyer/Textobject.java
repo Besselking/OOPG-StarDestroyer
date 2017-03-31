@@ -8,11 +8,11 @@ import processing.core.PGraphics;
  */
 public class Textobject extends GameObject {
     private String text;
-    private int score;
+    private int data;
 
-    public Textobject(String text, int score) {
+    public Textobject(String text, int data) {
         this.text = text;
-        this.score = score;
+        this.data = data;
     }
 
     public void update() {
@@ -22,7 +22,7 @@ public class Textobject extends GameObject {
         g.textSize(20);
         g.fill(255);
         g.textAlign(g.LEFT, g.TOP);
-        g.text(text + score, getX(), getY());
+        g.text(text + data, getX(), getY());
     }
 
     public String getText() {
@@ -33,11 +33,11 @@ public class Textobject extends GameObject {
         this.text = text;
     }
 
-    public int getScore() {
-        return score;
+    public int getData() {
+        return data;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setData(int data) {
+        this.data = data;
     }
 }

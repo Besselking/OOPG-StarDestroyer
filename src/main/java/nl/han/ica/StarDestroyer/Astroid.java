@@ -1,8 +1,10 @@
 package nl.han.ica.StarDestroyer;
 
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 
+import java.util.List;
 import java.util.Random;
 
 import static processing.core.PApplet.*;
@@ -31,8 +33,8 @@ public class Astroid extends Enemy{
         g.stroke(80);
         g.beginShape();
         for (float i = rot; i < rot+360; ++i) {
-            float xr = this.x+(map(PApplet.noise((i-rot)*smoothness),0,1,minRadius,maxRadius)) * cos(radians(i));
-            float yr = this.y+(map(PApplet.noise((i-rot)*smoothness),0,1,minRadius,maxRadius)) * sin(radians(i));
+            float xr = this.x+(map(PApplet.noise((i-rot)*smoothness),0,1,minRadius,maxRadius)) * cos(radians(i)) + width/2;
+            float yr = this.y+(map(PApplet.noise((i-rot)*smoothness),0,1,minRadius,maxRadius)) * sin(radians(i)) + height/2;
             g.vertex(xr,yr);
         }
         g.endShape(CLOSE);
@@ -44,6 +46,8 @@ public class Astroid extends Enemy{
         if(rot>=360) rot = 0;
     }
 
+
+
     @Override
     public void hit() {
 
@@ -51,7 +55,10 @@ public class Astroid extends Enemy{
 
     @Override
     public void action() {
-
+        for(int i=0; i<2; i++){
+            app.addGameObject(new Astroid(this.getX(),this.getY(), 140, 140, app));
+        }
+        app.deleteGameObject(this);
     }
 
     @Override
@@ -60,5 +67,17 @@ public class Astroid extends Enemy{
         if(direction) setDirectionSpeed(135, 2);
         else setDirectionSpeed(225, -2);
         wrap(app);
+    }
+
+    @Override
+    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+        for (GameObject c : collidedGameObjects) {
+            if (c instanceof Bullet) {
+                if (((Bullet)c).getOwner() instanceof Player) {
+                    this.action();
+                    app.deleteGameObject(c);
+                }
+            }
+        }
     }
 }

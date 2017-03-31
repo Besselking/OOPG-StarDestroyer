@@ -1,6 +1,9 @@
 package nl.han.ica.StarDestroyer;
 
+import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
+
+import java.util.List;
 
 /**
  * Created by Marijn Besseling on 24-Mar-17.
@@ -35,6 +38,11 @@ public class Star extends Enemy{
 
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
 
     }
 }

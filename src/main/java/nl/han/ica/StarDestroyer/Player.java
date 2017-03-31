@@ -33,7 +33,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         this.shots = 1;
         setFriction(0.04f);
         keys = new boolean[4];
-        vulnerable = true;
+        vulnerable = false;
     }
 
     @Override
@@ -111,8 +111,8 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         g.pushMatrix();
         g.translate(super.x, super.y);
         g.rotate(radians(direction));
-        g.fill(255);
-        g.stroke(255);
+        g.fill(255,(vulnerable)?255:100);
+        g.stroke(255,(vulnerable)?255:100);
         g.rectMode(CENTER);
         g.rect(0, 0, 20, 20);
         g.line(-10, 10, -10, 20);

@@ -14,7 +14,6 @@ import java.util.Random;
 public class GameApp extends GameEngine {
     private Textobject dashText, boardText;
     private Player player;
-    private ArrayList<Enemy> enemys = new ArrayList<>();
     private Random r = new Random();
 
 
@@ -31,18 +30,15 @@ public class GameApp extends GameEngine {
 
     private void createObjects() {
         player = new Player(this);
-        for(int i=0; i<5; i++) {
-            enemys.add(new Astroid(r.nextInt(1000), r.nextInt(900), 70, 70, this));
-        }
-        enemys.add(new Alien(100, 100, 70, 70, this, player));
         addGameObject(player, width/2, height/2);
-        for(Enemy e : enemys) {
-            addGameObject(e);
+        for(int i=0; i<5; i++) {
+            addGameObject(new Astroid(r.nextInt(this.getWidth()), r.nextInt(this.getHeight()), 140, 140, this));
         }
+        addGameObject(new Alien(100, 100, 70, 70, this, player));
 
         Dashboard dashBoard = new Dashboard(0, 0, width, 100);
         dashText = new Textobject("score: ", 0);
-        boardText = new Textobject("lifes: ", 3);
+        boardText = new Textobject("lifes: ", player.getLife());
         dashBoard.addGameObject(dashText, 500, 10);
         dashBoard.addGameObject(boardText, 20, 10);
         addDashboard(dashBoard);
@@ -57,5 +53,9 @@ public class GameApp extends GameEngine {
     }
 
     public void update() {
+        boardText.setData(player.getLife());
+        if(player.getLife()<0){
+            deleteAllGameOBjects();
+        }
     }
 }

@@ -3,6 +3,8 @@ package nl.han.ica.StarDestroyer;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
 
+import java.util.List;
+
 /**
  * Created by Marijn Besseling on 24-Mar-17.
  */
@@ -21,14 +23,16 @@ public class Alien extends Enemy{
 
     @Override
     public void draw(PGraphics g) {
+        g.ellipseMode(CORNER);
         g.fill(50, 150, 50);
         g.ellipse(x, y, width, height);
         g.fill(255);
-        g.ellipse(x-width/4, y-height/5, width/4, height/4);
-        g.ellipse(x+width/4, y-height/5, width/4, height/4);
+        g.ellipse(x+width/2, y+height/5, width/4, height/4);
+        g.ellipse(x+width/6, y+height/5, width/4, height/4);
         g.fill(0);
-        g.ellipse(x-width/4, y-height/5, width/8, height/8);
-        g.ellipse(x+width/4, y-height/5, width/8, height/8);
+        g.ellipse(x+width/2, y+height/5, width/8, height/8);
+        g.ellipse(x+width/6, y+height/5, width/8, height/8);
+        g.ellipseMode(CENTER);
     }
 
     @Override
@@ -54,5 +58,10 @@ public class Alien extends Enemy{
         else setDirectionSpeed(135, 3);
         wrap(app);
         action();
+    }
+
+    @Override
+    public void gameObjectCollisionOccurred(List<GameObject> collidedGameObjects) {
+
     }
 }
