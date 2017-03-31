@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created by Marijn Besseling on 22-Mar-17.
+ * Created by Marijn Besseling & Hendrik Camps on 22-Mar-17.
  */
 public class GameApp extends GameEngine {
     private Textobject dashText, boardText;

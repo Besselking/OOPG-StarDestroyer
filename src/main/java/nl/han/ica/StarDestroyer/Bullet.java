@@ -4,7 +4,7 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import processing.core.PGraphics;
 
 /**
- * Created by Marijn Besseling on 24-Mar-17.
+ * Created by Marijn Besseling & Hendrik Camps on 24-Mar-17.
  */
 public class Bullet extends GameObject {
     private GameApp app;
@@ -20,7 +20,6 @@ public class Bullet extends GameObject {
     @Override
     public void update() {
         if (!inBounds()) app.deleteGameObject(this);
-
     }
 
     private boolean inBounds() {
@@ -32,6 +31,5 @@ public class Bullet extends GameObject {
         g.stroke(255);
         g.fill(255);
         g.ellipse(super.x, super.y, 3, 3);
-
     }
 }

@@ -23,6 +23,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     private boolean[] keys;
     private PShape ship, engines;
     private PApplet papp;
+    private boolean shoot;
 
     public Player(GameApp app) {
         this.app = app;
@@ -38,9 +39,14 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
         if (keys[0]) direction += -3;
         if (keys[1]) direction += 3;
-        if (keys[2]) newSpeed = 6;
+        if (keys[2]) newSpeed = 4;
         else newSpeed -= (newSpeed/100);
-        if (keys[3]) shoot();
+        if (keys[3]) {
+            if (shoot) {
+                shoot();
+                shoot = false;
+            }
+        } else shoot = true;
 
         setDirectionSpeed(direction, newSpeed);
     }

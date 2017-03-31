@@ -36,6 +36,5 @@ public class Player  extends Cell{
         setDirectionSpeed(getAngleFrom(x,y)-180, getSpeed()+speed);
         world.addGameObject(new Cell(world,splitMass,getSpeed(),splitDirection, false),splitX+getX(),splitY+getY());
         mass -= splitMass;
-
     }
 }
