@@ -6,16 +6,28 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import java.util.List;
 
 /**
- * Created by Marijn Besseling on 24-Mar-17.
+ * Created by Marijn Besseling & Hendrik Camps on 24-Mar-17.
  */
 public abstract class Enemy extends GameObject implements ICollidableWithGameObjects{
     protected GameApp app;
 
+    /**
+     * Constructor
+     *
+     * @param x      x location of the enemy
+     * @param y      y location of the enemy
+     * @param width  width of the enemy
+     * @param height height of the enemy
+     * @param app    references the main app
+     */
     public Enemy(float x, float y, float width, float height, GameApp app) {
         super(x, y, width, height);
         this.app = app;
     }
 
+    /**
+     * causes the enemy to wrap around the screen when going out of bounds
+     */
     public void wrap() {
         if(x > app.getWidth() + width) x = -width;
         else if(x < -width) x = app.getWidth() + width;

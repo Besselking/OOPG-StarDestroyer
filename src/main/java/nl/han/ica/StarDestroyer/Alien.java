@@ -13,11 +13,21 @@ public class Alien extends Enemy{
     private GameObject player;
     private long shoot = 0;
 
+    /**
+     * Constructor
+     *
+     * @param x      x location
+     * @param y      y location
+     * @param width  width of the star
+     * @param height height of the star
+     * @param app    references the main app
+     * @param player references the player object as target
+     */
     public Alien(float x, float y, float width, float height, GameApp app, GameObject player) {
         super(x, y, width, height, app);
         this.app = app;
         this.player = player;
-     }
+    }
 
     @Override
     public void draw(PGraphics g) {
@@ -33,6 +43,9 @@ public class Alien extends Enemy{
         g.ellipseMode(CENTER);
     }
 
+    /**
+     * shoots at the player
+     */
     @Override
     public void action() {
         if(shoot%100 == 0) {
@@ -45,11 +58,17 @@ public class Alien extends Enemy{
         }
     }
 
+    /**
+     * deletes the alien when it's hit
+     */
     @Override
     public void hit() {
         app.deleteGameObject(this);
     }
 
+    /**
+     * moves the alien and calls other functions
+     */
     @Override
     public void updateEnemyObject() {
         if(x < app.getWidth()/3 || x > (app.getWidth()/3)*2) setDirectionSpeed(90, 3);

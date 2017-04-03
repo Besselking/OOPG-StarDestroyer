@@ -2,6 +2,7 @@
   <dictionary name="Besselking">
     <words>
       <w>cellsplitter</w>
+      <w>multishot</w>
       <w>quadtree</w>
       <w>subnodes</w>
     </words>

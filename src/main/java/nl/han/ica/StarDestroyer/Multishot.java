@@ -7,14 +7,18 @@ import processing.core.PGraphics;
  * Created by Marijn Besseling on 24-Mar-17.
  */
 public class Multishot extends GameObject implements IPowerup {
-    private GameApp app;
     private int shots;
     private boolean show;
 
-
+    /**
+     * Constructor
+     *
+     * @param x     x location
+     * @param y     y location
+     * @param shots amount of shots the player shoots when this powerup is active
+     */
     public Multishot(GameApp app, float x, float y, int shots) {
         super(x, y, 20, 20);
-        this.app = app;
         this.shots = shots;
         this.show = true;
     }

@@ -10,6 +10,13 @@ public class Textobject extends GameObject {
     private String text;
     private int data;
 
+
+    /**
+     * Constructor
+     *
+     * @param text text to be displayed
+     * @param data data to be displayed after text
+     */
     public Textobject(String text, int data) {
         this.text = text;
         this.data = data;
@@ -25,18 +32,11 @@ public class Textobject extends GameObject {
         g.text(text + data, getX(), getY());
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getData() {
-        return data;
-    }
-
+    /**
+     * sets the data to the given parameter
+     *
+     * @param data data to be set
+     */
     public void setData(int data) {
         this.data = data;
     }

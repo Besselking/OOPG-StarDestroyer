@@ -7,17 +7,19 @@ import processing.core.PGraphics;
  * Created by Marijn Besseling on 24-Mar-17.
  */
 public class Fatbullets extends GameObject implements IPowerup {
-    private GameApp app;
     private boolean show;
 
-
+    /**
+     * Constructor
+     *
+     * @param x x location
+     * @param y y location
+     */
     public Fatbullets(GameApp app, float x, float y) {
         super(x, y, 20, 20);
-        this.app = app;
         this.show = true;
 
     }
-
 
     public void update() {
     }

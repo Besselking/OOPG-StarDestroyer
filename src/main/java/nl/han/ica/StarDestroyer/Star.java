@@ -10,6 +10,15 @@ public class Star extends Enemy{
     private boolean blackhole;
     private int hits = 0;
 
+    /**
+     * Constructor
+     *
+     * @param x      x location
+     * @param y      y location
+     * @param width  width of the star
+     * @param height height of the star
+     * @param app    references the main app
+     */
     Star(float x, float y, float width, float height, GameApp app) {
         super(x, y, width, height, app);
         blackhole = false;
@@ -24,10 +33,13 @@ public class Star extends Enemy{
         g.ellipse(x, y, width, height);
         if (blackhole) g.fill(0);
         else g.fill(209, 58, 8, 150);
-        g.ellipse(x+edge/2, y+edge/2, width-edge, height-edge);
+        g.ellipse(x + edge / 2, y + edge / 2, width - edge, height - edge);
 
     }
 
+    /**
+     * attracts all other objects to the black hole
+     */
     @Override
     public void action() {
         for(GameObject g : app.getGameObjectItems()){
@@ -36,12 +48,19 @@ public class Star extends Enemy{
         }
     }
 
+    /**
+     * changes the star to a black hole and takes 1 hit
+     */
     @Override
     public void hit() {
         blackhole = true;
         hits++;
     }
 
+    /**
+     * moves the star and calls action when it has turned into a blackhole
+     * if the blackhole takes more than 10 hits it will be destroyed
+     */
     @Override
     public void updateEnemyObject() {
         if(!blackhole) {

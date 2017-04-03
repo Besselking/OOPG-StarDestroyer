@@ -10,7 +10,13 @@ public class Lifeup extends GameObject implements IPowerup {
     private GameApp app;
     private boolean show;
 
-
+    /**
+     * Constructor
+     *
+     * @param app reference to main app
+     * @param x   x location
+     * @param y   y location
+     */
     public Lifeup(GameApp app, float x, float y) {
         super(x, y, 20, 20);
         this.app = app;
@@ -30,7 +36,6 @@ public class Lifeup extends GameObject implements IPowerup {
             g.text("1up", super.x, super.y);
         }
     }
-
 
     public void apply(Player player) {
         show = false;

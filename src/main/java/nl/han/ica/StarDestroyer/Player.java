@@ -10,7 +10,7 @@ import static processing.core.PApplet.radians;
 
 /**
  * Created by Marijn Besseling on 24-Mar-17.
- * better
+ * The player class (small white ship)
  */
 public class Player extends GameObject implements ICollidableWithGameObjects {
     private int life, shots, bulletSize;
@@ -23,6 +23,11 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
     private boolean vulnerable;
     private int iFrames;
 
+    /**
+     * Constructor
+     *
+     * @param app reference to the main app
+     */
     public Player(GameApp app) {
         setWidth(20);
         setHeight(20);
@@ -102,7 +107,9 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         }
     }
 
-
+    /**
+     * shoots 1 or multiple bullets based on the "shots" variable
+     */
     public void shoot() {
         for (int i = 0; i < shots; i++) {
             Bullet bullet = new Bullet(app, this, bulletSpeed, direction + ((i % 2 == 0) ? i : -i - 1), bulletSize);
@@ -110,24 +117,42 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         }
     }
 
-
+    /**
+     * calls the apply function in the current active power-up
+     */
     public void applyPU() {
         PU.apply(this);
     }
 
+    /**
+     * sets the speed of the player to the amount given by the active power-up
+     *
+     * @param amount the new speed
+     */
     public void addSpeed(float amount) {
         playerSpeed = amount;
     }
 
+    /**
+     * sets the amount of bullets the player spawns in shoot()
+     * @param amount amount of bullets
+     */
     public void addShots(int amount) {
         shots = amount;
     }
 
+    /**
+     * adds a life to the player
+     * @param amount amount of lifes to be added
+     */
     public void addLife(int amount) {
         life += amount;
         PU = null;
     }
 
+    /**
+     * makes the player shoot slower and bigger bullets
+     */
     public void makeFatBullets() {
         bulletSize = 10;
         bulletSpeed = 4;
@@ -152,6 +177,10 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         g.popMatrix();
     }
 
+
+    /**
+     * causes the player to wrap around the screen when going out of bounds
+     */
     public void wrap() {
         if(x > app.getWidth() + width) x = -width;
         else if(x < -width) x = app.getWidth() + width;
@@ -159,11 +188,18 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         else if(y < -height) y = app.getHeight() + height;
     }
 
+    /**
+     * getter for the life variable
+     * @return the current amount of lifes
+     */
     public int getLife() {
         return life;
     }
 
-
+    /**
+     * called when the player is supposed to lose a life
+     * the player will als0 be invulnerable for a few seconds and loses his power-up
+     */
     public void die() {
         vulnerable = false;
         PU = null;

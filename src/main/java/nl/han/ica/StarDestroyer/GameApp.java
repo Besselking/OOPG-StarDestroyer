@@ -30,6 +30,9 @@ public class GameApp extends GameEngine {
         createObjects();
     }
 
+    /**
+     * creates player and dashboard when setting up the game
+     */
     private void createObjects() {
         player = new Player(this);
         addGameObject(player, width/2, height/2);
@@ -41,6 +44,12 @@ public class GameApp extends GameEngine {
         addDashboard(dashBoard);
     }
 
+    /**
+     * creates a new view that captures the whole screen
+     *
+     * @param screenWidth
+     * @param screenHeight
+     */
     private void createViewWithoutViewport(int screenWidth, int screenHeight) {
         View view = new View(screenWidth, screenHeight);
         view.setBackground(40, 40, 40);
@@ -48,14 +57,22 @@ public class GameApp extends GameEngine {
         size(screenWidth, screenHeight);
     }
 
+    /**
+     * creates new enemies when a round is starting
+     */
     private void createEnemy() {
-        for(int i=0; i<6; i++) {
+        for (int i = 0; i < 6; i++) {
             addGameObject(new Astroid(r.nextInt(this.getWidth()), r.nextInt(this.getHeight()), 3, this));
         }
         addGameObject(new Alien(100, 100, 70, 70, this, player));
         addGameObject(new Star(0, this.getHeight()/3*2, 50, 50, this));
     }
 
+    /**
+     * creates a new power-up when a round is starting
+     *
+     * @param pu which power-up needs to be spawned
+     */
     private void createPU(int pu) {
         System.out.println(pu);
         switch (pu) {
@@ -74,6 +91,9 @@ public class GameApp extends GameEngine {
         }
     }
 
+    /**
+     * starts a new round when all enemies are dead by creating new enemies and power-ups
+     */
     private void updateEnemyPU() {
         for(GameObject O : this.getGameObjectItems()) {
             if(O instanceof Astroid || O instanceof Alien) {

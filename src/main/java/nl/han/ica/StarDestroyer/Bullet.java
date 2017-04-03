@@ -10,6 +10,15 @@ public class Bullet extends GameObject {
     private GameApp app;
     private GameObject owner;
 
+    /**
+     * Constructor
+     *
+     * @param app           references the main app
+     * @param owner         references the object that shot this bullet
+     * @param initSpeed     initial speed given to the bullet
+     * @param initDirection initial direction given to the bullet
+     * @param size          diameter of the bullet in pixels
+     */
     public Bullet(GameApp app, GameObject owner, float initSpeed, float initDirection, int size) {
         super(owner.getX(), owner.getY(), size, size);
         this.app = app;
@@ -17,6 +26,11 @@ public class Bullet extends GameObject {
         setDirectionSpeed(initDirection, initSpeed);
     }
 
+    /**
+     * getter for the owner variable
+     *
+     * @return the owner of the bullet
+     */
     public GameObject getOwner() {
         return owner;
     }
@@ -26,6 +40,10 @@ public class Bullet extends GameObject {
         if (!inBounds()) app.deleteGameObject(this);
     }
 
+    /**
+     * checks if the bullet is in bounds
+     * @return true if the bullet is in bounds and false if the bullet is out of bounds
+     */
     private boolean inBounds() {
         return (super.x < app.getWidth()+10 && super.x > -10 && super.y < app.getHeight()+10 && super.y > -10);
     }

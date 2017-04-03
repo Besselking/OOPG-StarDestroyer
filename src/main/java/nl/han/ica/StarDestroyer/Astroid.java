@@ -17,6 +17,15 @@ public class Astroid extends Enemy{
     private float minRadius, maxRadius;
     private int seed, direction, type;
 
+
+    /**
+     * Constructor
+     *
+     * @param x    x location
+     * @param y    y location
+     * @param type a value beteen 1 2 and 3 that changes the size of the asteroid
+     * @param app  references the main app
+     */
     public Astroid(float x, float y, int type, GameApp app) {
         super(x, y, type*35f, type*35f, app);
         this.direction = r.nextInt();
@@ -40,18 +49,27 @@ public class Astroid extends Enemy{
         g.endShape(CLOSE);
     }
 
+    /**
+     * makes the asteroid rotate slowly
+     */
     public void rotation() {
         rot += 0.5;
         if(rot>=360) rot = 0;
     }
 
 
-
+    /**
+     * destroys the asteroid if it's hit
+     */
     @Override
     public void hit() {
         app.deleteGameObject(this);
     }
 
+
+    /**
+     * spawns new asteroids when it's hit and adds points to the score
+     */
     @Override
     public void action() {
         if(this.type > 1) {
@@ -62,6 +80,9 @@ public class Astroid extends Enemy{
         } else app.score += 150;
     }
 
+    /**
+     * moves and calls helper-functions
+     */
     @Override
     public void updateEnemyObject() {
         rotation();
