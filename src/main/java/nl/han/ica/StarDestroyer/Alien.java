@@ -37,7 +37,7 @@ public class Alien extends Enemy{
     public void action() {
         if(shoot%100 == 0) {
             this.target = getAngleFrom(player);
-            Bullet bullet = new Bullet(app, this, 5, target);
+            Bullet bullet = new Bullet(app, this, 5, target, 3);
             app.addGameObject(bullet);
             shoot++;
         } else {

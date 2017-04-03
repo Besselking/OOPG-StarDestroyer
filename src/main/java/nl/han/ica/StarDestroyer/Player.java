@@ -15,7 +15,8 @@ import static processing.core.PApplet.radians;
  * better
  */
 public class Player extends GameObject implements ICollidableWithGameObjects {
-    private int life, shots;
+    private int life, shots, bulletSize;
+    private float playerSpeed, bulletSpeed;
     private IPowerup PU;
     private GameApp app;
     private float direction = getDirection();
@@ -33,17 +34,21 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         this.shots = 1;
         this.keys = new boolean[4];
         this.vulnerable = false;
+        this.playerSpeed = 4;
+        this.bulletSize = 3;
+        this.bulletSpeed = 6;
     }
 
     @Override
     public void update() {
+        if (PU != null) applyPU();
         float newSpeed = getSpeed();
         if (!vulnerable) iFrames++;
         if (iFrames > 240) vulnerable = true;
 
         if (keys[0]) direction += -3;
         if (keys[1]) direction += 3;
-        if (keys[2]) newSpeed = 4;
+        if (keys[2]) newSpeed = playerSpeed;
         else newSpeed -= (newSpeed/100);
         if (keys[3]) {
             if (shoot) {
@@ -55,6 +60,11 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         setFriction(0.04f);
         setDirectionSpeed(direction, newSpeed);
         wrap();
+
+        this.playerSpeed = 4;
+        this.bulletSize = 3;
+        this.bulletSpeed = 6;
+        this.shots = 1;
     }
 
     @Override
@@ -89,24 +99,39 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
                 if (c instanceof Enemy) die();
                 else if (c instanceof Bullet) {
                     if (((Bullet) c).getOwner() != this) die();
-                }
+                } else if (c instanceof IPowerup) PU = (IPowerup) c;
             }
         }
     }
 
 
     public void shoot() {
-        Bullet bullet = new Bullet(app, this, 5, direction);
-        app.addGameObject(bullet);
+        for (int i = 0; i < shots; i++) {
+            Bullet bullet = new Bullet(app, this, bulletSpeed, direction + ((i % 2 == 0) ? i : -i - 1), bulletSize);
+            app.addGameObject(bullet);
+        }
     }
 
 
     public void applyPU() {
+        PU.apply(this);
     }
 
+    public void addSpeed(float amount) {
+        playerSpeed = amount;
+    }
 
-    public void setLife(int life) {
-        this.life = life;
+    public void addShots(int amount) {
+        shots = amount;
+    }
+
+    public void addLife(int amount) {
+        life += amount;
+    }
+
+    public void makeFatBullets() {
+        bulletSize = 10;
+        bulletSpeed = 4;
     }
 
     private void display(PGraphics g) {
@@ -142,6 +167,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
     public void die() {
         vulnerable = false;
+        PU = null;
         iFrames = 0;
         life--;
         setX(app.getWidth() / 2);

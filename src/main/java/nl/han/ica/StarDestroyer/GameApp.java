@@ -40,6 +40,9 @@ public class GameApp extends GameEngine {
         dashBoard.addGameObject(dashText, this.width/2, 10);
         dashBoard.addGameObject(boardText, 20, 10);
         addDashboard(dashBoard);
+
+        Multishot pu = new Multishot(this, 100, 100, 5);
+        addGameObject(pu);
     }
 
     private void createViewWithoutViewport(int screenWidth, int screenHeight) {

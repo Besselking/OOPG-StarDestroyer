@@ -10,8 +10,8 @@ public class Bullet extends GameObject {
     private GameApp app;
     private GameObject owner;
 
-    public Bullet(GameApp app, GameObject owner, float initSpeed, float initDirection) {
-        super(owner.getX(), owner.getY(), 3, 3);
+    public Bullet(GameApp app, GameObject owner, float initSpeed, float initDirection, int size) {
+        super(owner.getX(), owner.getY(), size, size);
         this.app = app;
         this.owner = owner;
         setDirectionSpeed(initDirection, initSpeed);
@@ -34,7 +34,7 @@ public class Bullet extends GameObject {
     public void draw(PGraphics g) {
         g.stroke(255);
         g.fill(255);
-        g.ellipse(super.x, super.y, 3, 3);
+        g.ellipse(super.x, super.y, super.width, super.height);
     }
 
 }

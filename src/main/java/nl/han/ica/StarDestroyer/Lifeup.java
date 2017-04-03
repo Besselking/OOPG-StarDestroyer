@@ -8,10 +8,13 @@ import processing.core.PGraphics;
  */
 public class Lifeup extends GameObject implements IPowerup {
     private GameApp app;
+    private boolean show;
 
 
-    public Lifeup(GameApp app) {
+    public Lifeup(GameApp app, float x, float y) {
+        super(x, y, 20, 20);
         this.app = app;
+        this.show = true;
     }
 
 
@@ -20,9 +23,16 @@ public class Lifeup extends GameObject implements IPowerup {
 
 
     public void draw(PGraphics g) {
+        if (show) {
+            g.fill(0xd60dc2);
+            g.rect(super.x, super.y, super.width, super.height);
+            g.text("1up", super.x, super.y);
+        }
     }
 
 
-    public void apply() {
+    public void apply(Player player) {
+        show = false;
+        player.addLife(1);
     }
 }
