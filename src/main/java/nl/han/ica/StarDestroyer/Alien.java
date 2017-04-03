@@ -51,7 +51,7 @@ public class Alien extends Enemy{
     }
 
     @Override
-    public void update() {
+    public void updateEnemyObject() {
         if(x < app.getWidth()/3 || x > (app.getWidth()/3)*2) setDirectionSpeed(90, 3);
         else setDirectionSpeed(135, 3);
         wrap();

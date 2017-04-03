@@ -38,4 +38,10 @@ public abstract class Enemy extends GameObject implements ICollidableWithGameObj
 
     public abstract void hit();
     public abstract void action();
+    public abstract void updateEnemyObject();
+
+    @Override
+    public void update() {
+        updateEnemyObject();
+    }
 }

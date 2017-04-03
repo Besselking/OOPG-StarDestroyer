@@ -52,6 +52,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
             }
         } else shoot = true;
 
+        setFriction(0.04f);
         setDirectionSpeed(direction, newSpeed);
         wrap();
     }

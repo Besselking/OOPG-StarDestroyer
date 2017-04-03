@@ -54,17 +54,16 @@ public class GameApp extends GameEngine {
             addGameObject(new Astroid(r.nextInt(this.getWidth()), r.nextInt(this.getHeight()), 3, this));
         }
         addGameObject(new Alien(100, 100, 70, 70, this, player));
+        addGameObject(new Star(0, this.getHeight()/3*2, 50, 50, this));
     }
 
-    public void updateEnemy() {
+    private void updateEnemy() {
         for(GameObject O : this.getGameObjectItems()) {
             if(O instanceof Astroid || O instanceof Alien) {
                 enemy++;
             }
         }
-        if (enemy == 0) {
-            createEnemy();
-        }
+        if (enemy == 0) createEnemy();
         enemy = 0;
     }
 
@@ -72,7 +71,7 @@ public class GameApp extends GameEngine {
         updateEnemy();
         boardText.setData(player.getLife());
         dashText.setData(score);
-        if(player.getLife()<0){
+        if(player.getLife() < 0){
             deleteAllGameOBjects();
         }
     }

@@ -63,7 +63,7 @@ public class Astroid extends Enemy{
     }
 
     @Override
-    public void update() {
+    public void updateEnemyObject() {
         rotation();
         setDirectionSpeed(direction, 2);
         wrap();
