@@ -32,6 +32,7 @@ public class Speed extends GameObject implements IPowerup {
         if (show) {
             g.fill(0xf4, 0xeb, 0x42);
             g.rect(super.x, super.y, super.width, super.height);
+            g.fill(0);
             g.text(speed, super.x, super.y);
         }
     }

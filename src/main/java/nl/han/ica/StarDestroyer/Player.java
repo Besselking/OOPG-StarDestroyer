@@ -72,11 +72,22 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
     @Override
     public void draw(PGraphics g) {
-        if (iFrames % 2 != 0 && !vulnerable) {
-            display(g);
-        } else {
-            display(g);
+        g.pushMatrix();
+        g.translate(super.x, super.y);
+        g.rotate(radians(direction));
+        g.fill(255, (vulnerable) ? 255 : 100);
+        g.stroke(255, (vulnerable) ? 255 : 100);
+        g.rectMode(CENTER);
+        g.rect(0, 0, 20, 20);
+        g.line(-10, 10, -10, 20);
+        g.line(10, 10, 10, 20);
+        if (keys[2]) {
+            g.fill(255, 128, 0);
+            g.noStroke();
+            g.triangle(-8, 11, 8, 11, 0, 30);
         }
+        g.rotate(radians(-direction));
+        g.popMatrix();
     }
 
     public void keyPressed(int keyCode, char key) {
@@ -157,26 +168,6 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
         bulletSize = 10;
         bulletSpeed = 4;
     }
-
-    private void display(PGraphics g) {
-        g.pushMatrix();
-        g.translate(super.x, super.y);
-        g.rotate(radians(direction));
-        g.fill(255,(vulnerable)?255:100);
-        g.stroke(255,(vulnerable)?255:100);
-        g.rectMode(CENTER);
-        g.rect(0, 0, 20, 20);
-        g.line(-10, 10, -10, 20);
-        g.line(10, 10, 10, 20);
-        if (keys[2]) {
-            g.fill(255, 128, 0);
-            g.noStroke();
-            g.triangle(-8, 11, 8, 11, 0, 30);
-        }
-        g.rotate(radians(-direction));
-        g.popMatrix();
-    }
-
 
     /**
      * causes the player to wrap around the screen when going out of bounds

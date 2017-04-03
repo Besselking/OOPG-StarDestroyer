@@ -16,7 +16,7 @@ public class GameApp extends GameEngine {
     private Player player;
     private Random r = new Random();
     private int enemy;
-    protected int score = 0;
+    private int score = 0;
 
 
     public static void main(String[] args) {
@@ -105,6 +105,10 @@ public class GameApp extends GameEngine {
             createPU(r.nextInt(4));
         }
         enemy = 0;
+    }
+
+    public void addScore(int score) {
+        this.score += score;
     }
 
     public void update() {

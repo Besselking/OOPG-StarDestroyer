@@ -76,8 +76,8 @@ public class Astroid extends Enemy{
             for (int i = 0; i < 2; i++) {
                 app.addGameObject(new Astroid(this.getX(), this.getY(), this.type - 1, app));
             }
-            app.score += 100;
-        } else app.score += 150;
+            app.addScore(100);
+        } else app.addScore(150);
     }
 
     /**

@@ -29,6 +29,7 @@ public class Fatbullets extends GameObject implements IPowerup {
         if (show) {
             g.fill(0xce ,0x5c, 0x10);
             g.rect(super.x, super.y, super.width, super.height);
+            g.fill(255);
             g.text('F', super.x, super.y);
         }
     }
