@@ -14,6 +14,7 @@ public class Fatbullets extends GameObject implements IPowerup {
     public Fatbullets(GameApp app, float x, float y) {
         super(x, y, 20, 20);
         this.app = app;
+        this.show = true;
 
     }
 
@@ -24,7 +25,7 @@ public class Fatbullets extends GameObject implements IPowerup {
 
     public void draw(PGraphics g) {
         if (show) {
-            g.fill(0xce5c10);
+            g.fill(0xce ,0x5c, 0x10);
             g.rect(super.x, super.y, super.width, super.height);
             g.text('F', super.x, super.y);
         }

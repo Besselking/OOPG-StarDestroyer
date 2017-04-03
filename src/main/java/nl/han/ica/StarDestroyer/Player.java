@@ -2,9 +2,7 @@ package nl.han.ica.StarDestroyer;
 
 import nl.han.ica.OOPDProcessingEngineHAN.Collision.ICollidableWithGameObjects;
 import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
-import processing.core.PApplet;
 import processing.core.PGraphics;
-import processing.core.PShape;
 
 import java.util.List;
 
@@ -127,6 +125,7 @@ public class Player extends GameObject implements ICollidableWithGameObjects {
 
     public void addLife(int amount) {
         life += amount;
+        PU = null;
     }
 
     public void makeFatBullets() {

@@ -6,7 +6,6 @@ import nl.han.ica.OOPDProcessingEngineHAN.Objects.GameObject;
 import nl.han.ica.OOPDProcessingEngineHAN.View.View;
 import processing.core.PApplet;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -40,9 +39,6 @@ public class GameApp extends GameEngine {
         dashBoard.addGameObject(dashText, this.width/2, 10);
         dashBoard.addGameObject(boardText, 20, 10);
         addDashboard(dashBoard);
-
-        Multishot pu = new Multishot(this, 100, 100, 5);
-        addGameObject(pu);
     }
 
     private void createViewWithoutViewport(int screenWidth, int screenHeight) {
@@ -60,18 +56,39 @@ public class GameApp extends GameEngine {
         addGameObject(new Star(0, this.getHeight()/3*2, 50, 50, this));
     }
 
-    private void updateEnemy() {
+    private void createPU(int pu) {
+        System.out.println(pu);
+        switch (pu) {
+            case 1:
+                addGameObject(new Multishot(this, r.nextInt(this.getWidth()-20), r.nextInt(this.getHeight()-20), 4));
+                break;
+            case 2:
+                addGameObject(new Fatbullets(this, r.nextInt(this.getWidth()-20), r.nextInt(this.getHeight()-20)));
+                break;
+            case 3:
+                addGameObject(new Lifeup(this, r.nextInt(this.getWidth()-20), r.nextInt(this.getHeight()-20)));
+                break;
+            case 0:
+                addGameObject(new Speed(this, r.nextInt(this.getWidth()-20), r.nextInt(this.getHeight()-20), 6));
+                break;
+        }
+    }
+
+    private void updateEnemyPU() {
         for(GameObject O : this.getGameObjectItems()) {
             if(O instanceof Astroid || O instanceof Alien) {
                 enemy++;
             }
         }
-        if (enemy == 0) createEnemy();
+        if (enemy == 0) {
+            createEnemy();
+            createPU(r.nextInt(4));
+        }
         enemy = 0;
     }
 
     public void update() {
-        updateEnemy();
+        updateEnemyPU();
         boardText.setData(player.getLife());
         dashText.setData(score);
         if(player.getLife() < 0){

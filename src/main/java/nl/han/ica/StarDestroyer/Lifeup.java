@@ -24,8 +24,9 @@ public class Lifeup extends GameObject implements IPowerup {
 
     public void draw(PGraphics g) {
         if (show) {
-            g.fill(0xd60dc2);
+            g.fill(0xd6, 0x0d, 0xc2);
             g.rect(super.x, super.y, super.width, super.height);
+            g.fill(255);
             g.text("1up", super.x, super.y);
         }
     }
@@ -34,5 +35,6 @@ public class Lifeup extends GameObject implements IPowerup {
     public void apply(Player player) {
         show = false;
         player.addLife(1);
+        app.deleteGameObject(this);
     }
 }

@@ -31,7 +31,7 @@ public class Star extends Enemy{
     @Override
     public void action() {
         for(GameObject g : app.getGameObjectItems()){
-            if(g instanceof Player) g.setFriction(0.8f);
+            if(g instanceof Player || g instanceof IPowerup) g.setFriction(0.8f);
             else g.setDirectionSpeed(g.getAngleFrom(this), 2);
         }
     }

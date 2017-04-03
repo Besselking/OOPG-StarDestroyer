@@ -26,7 +26,7 @@ public class Speed extends GameObject implements IPowerup {
 
     public void draw(PGraphics g) {
         if (show) {
-            g.fill(0xf4eb42);
+            g.fill(0xf4, 0xeb, 0x42);
             g.rect(super.x, super.y, super.width, super.height);
             g.text(speed, super.x, super.y);
         }

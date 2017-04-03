@@ -27,7 +27,7 @@ public class Bullet extends GameObject {
     }
 
     private boolean inBounds() {
-        return (super.x < app.getWidth() && super.x > 0 && super.y < app.getHeight() && super.y > 0);
+        return (super.x < app.getWidth()+10 && super.x > -10 && super.y < app.getHeight()+10 && super.y > -10);
     }
 
     @Override
